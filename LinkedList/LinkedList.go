@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-    fmt.Println("Hello, World!")
+    fmt.Println("Hello, Linked List!")
 	linkedList := new(LinkedList)
 	linkedList.add(1)
 	linkedList.add(2)
@@ -28,7 +28,7 @@ func (node Node) String () string{
 
 type LinkedList struct {
 	head *Node
-	length int `default:1`
+	length int 
 }
 
 func (list *LinkedList) add(el int){
