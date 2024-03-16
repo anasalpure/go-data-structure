@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-    fmt.Println("Hello, Linked List!")
+	fmt.Println("Hello, Linked List!")
 	linkedList := new(LinkedList)
 	linkedList.add(1)
 	linkedList.add(2)
@@ -18,50 +18,52 @@ func main() {
 	fmt.Print(linkedList.length)
 }
 
-type Node struct{
+type Node struct {
 	value int
-	next *Node
+	next  *Node
 }
-func (node Node) String () string{
+
+func (node Node) String() string {
 	return fmt.Sprintf("%d", node.value)
 }
 
 type LinkedList struct {
-	head *Node
-	length int 
+	head   *Node
+	length int
 }
 
-func (list *LinkedList) add(el int){
+func (list *LinkedList) add(el int) {
 	newNode := &Node{value: el}
 
-	if  list.head == nil {
+	if list.head == nil {
 		list.head = newNode
 	} else {
 		var current *Node = list.head
-		for ; current.next != nil; current = current.next {}
+		for ; current.next != nil; current = current.next {
+		}
 		current.next = newNode
 	}
 	list.length++
 }
 
 func (list *LinkedList) remove(el int) bool {
-	removed := false;
+	removed := false
 	var previous *Node
 	// remove first node
 	if list.head != nil && list.head.value == el {
 		list.head = list.head.next
-		list.length --
+		list.length--
 		return true
 
 	}
 
-	for current := list.head; current.next !=nil; current= current.next {
+	for current := list.head; current.next != nil; current = current.next {
 		if current.value == el {
 			previous.next = current.next
-			list.length --
+			list.length--
 			removed = true
 		}
-		previous = current;
+		previous = current
 	}
 	return removed
 }
@@ -73,10 +75,9 @@ func (list *LinkedList) String() string {
 	// fmt.Printf("%#v",list)
 	// fmt.Println()
 
-
 	sb := strings.Builder{}
-	for current:=list.head ; current != nil; current = current.next {
-		sb.WriteString(fmt.Sprintf("%d, ",current.value))
+	for current := list.head; current != nil; current = current.next {
+		sb.WriteString(fmt.Sprintf("%d, ", current.value))
 	}
 	return sb.String()
 }

@@ -6,37 +6,38 @@ import (
 )
 
 func main() {
-    fmt.Println("Hello, Stack!")
+	fmt.Println("Hello, Stack!")
 	stack := new(Stack)
 	stack.push(1)
 	stack.push(2)
 	stack.push(3)
 	stack.push(4)
-	top,_ := stack.top()
+	top, _ := stack.top()
 	fmt.Println(top)
 	fmt.Println("-------")
 
 	for !stack.isEmpty() {
-		val,_ := stack.pop()
+		val, _ := stack.pop()
 		fmt.Println(val)
 	}
 
 }
 
-type Node struct{
+type Node struct {
 	value int
-	next *Node
+	next  *Node
 }
-func (node Node) String () string{
+
+func (node Node) String() string {
 	return fmt.Sprintf("%d", node.value)
 }
 
 type Stack struct {
-	head *Node
-	length int 
+	head   *Node
+	length int
 }
 
-func (stack *Stack) push(el int){
+func (stack *Stack) push(el int) {
 	// stack.head = &Node{el, stack.head}
 
 	newNode := Node{value: el}
@@ -49,31 +50,31 @@ func (stack *Stack) push(el int){
 	stack.length++
 }
 
-func (stack *Stack) pop() (int ,bool) {
+func (stack *Stack) pop() (int, bool) {
 	if !stack.isEmpty() {
 		val := stack.head.value
 		stack.head = stack.head.next
-		stack.length --
+		stack.length--
 		return val, true
 	}
-	return 0 , false
+	return 0, false
 }
 
-func (stack *Stack) top() (int ,bool) {
+func (stack *Stack) top() (int, bool) {
 	if stack.head != nil {
-		return  stack.head.value , true
+		return stack.head.value, true
 	}
-	return 0 , false
+	return 0, false
 }
 
 func (stack *Stack) isEmpty() bool {
-	return stack.head == nil 
+	return stack.head == nil
 }
 
 func (stack *Stack) String() string {
 	sb := strings.Builder{}
-	for current:=stack.head ; current != nil; current = current.next {
-		sb.WriteString(fmt.Sprintf("%d, ",current.value))
+	for current := stack.head; current != nil; current = current.next {
+		sb.WriteString(fmt.Sprintf("%d, ", current.value))
 	}
 	return sb.String()
 }
