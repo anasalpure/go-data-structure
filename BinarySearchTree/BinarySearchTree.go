@@ -5,15 +5,17 @@ import (
 	"strings"
 )
 
-/* BST
-          50
-       /     \
-      30      70
-     /  \    /  \
-   20   40  60   80
+/*
+BST
+
+	       50
+	    /     \
+	   30      70
+	  /  \    /  \
+	20   40  60   80
 */
 func main() {
-    fmt.Println("Hello, BST!")
+	fmt.Println("Hello, BST!")
 	bst := Tree{}
 	bst.insert(50)
 	bst.insert(20)
@@ -27,29 +29,29 @@ func main() {
 }
 
 type Node struct {
-	value  int
-	left   *Node
-	right  *Node
+	value int
+	left  *Node
+	right *Node
 }
 
-func (node Node) String () string{
+func (node Node) String() string {
 	return fmt.Sprintf("%d", node.value)
 }
 
-func(node *Node) insert(el int){
-	
-	if el > node.value{
+func (node *Node) insert(el int) {
+
+	if el > node.value {
 		// go right
 		if node.right == nil {
 			node.right = &Node{value: el}
-		}else{
+		} else {
 			node.right.insert(el)
 		}
-	}else {
+	} else {
 		// go left
 		if node.left == nil {
 			node.left = &Node{value: el}
-		}else{
+		} else {
 			node.left.insert(el)
 		}
 	}
@@ -57,23 +59,21 @@ func(node *Node) insert(el int){
 
 type Tree struct {
 	head *Node
-	size int 
+	size int
 }
 
-
 func (tree *Tree) insert(el int) {
-	if(tree.head == nil){
+	if tree.head == nil {
 		newNode := Node{value: el}
-		tree.head = &newNode 
-	}else{
+		tree.head = &newNode
+	} else {
 		tree.head.insert(el)
 	}
 	tree.size++
 }
 
-
 func (tree Tree) printInOrder(node *Node, sb *strings.Builder) {
-	if node== nil {
+	if node == nil {
 		return
 	} else {
 		tree.printInOrder(node.left, sb)
@@ -82,10 +82,8 @@ func (tree Tree) printInOrder(node *Node, sb *strings.Builder) {
 	}
 }
 
-func (tree Tree) String() string{
+func (tree Tree) String() string {
 	sb := strings.Builder{}
-	tree.printInOrder(tree.head ,&sb)
+	tree.printInOrder(tree.head, &sb)
 	return sb.String()
 }
-
-
